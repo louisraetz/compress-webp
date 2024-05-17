@@ -4,16 +4,10 @@ const path = require('path');
 const yargs = require('yargs');
 
 const argv = yargs
-	.usage('Usage: $0 --path [dir] [--output [dir]]')
-	.option('path', {
-		alias: 'p',
-		describe: 'Directory path containing .webp files',
-		type: 'string',
-		demandOption: true,
-	})
-	.option('output', {
-		alias: 'o',
-		describe: 'Output directory path for compressed .webp files',
+	.usage('Usage: $0 --g [game-name]')
+	.option('game', {
+		alias: 'g',
+		describe: 'the games name',
 		type: 'string',
 		demandOption: false,
 	})
@@ -27,8 +21,8 @@ const argv = yargs
 	.alias('h', 'help')
 	.argv;
 
-const directoryPath = path.resolve(argv.path);
-const outputPath = argv.output ? path.resolve(argv.output) : directoryPath;
+const directoryPath = path.resolve(`/Users/louisraetz/dev/SLAY/pengu-games/${argv.game}/game-files/images`);
+const outputPath = directoryPath
 
 fs.readdir(directoryPath, (err, files) => {
 	if (err) {
